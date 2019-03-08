@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nesh Dashboard</title>
+
+    <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
+    <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
+    <script data-th-src="@{/webjars/timeago.js/3.0.0/dist/timeago.js}"></script>
+</head>
+<body>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Nesh Dashboard - [[${company}]]([[${ticker}]])
+            </h1>
+        </div>
+    </div>
+</section>
+<section data-th-if="${stock}"class="section">
+    <div class="container">
+        <h1 class="title">Stock Price</h1>
+        <ul>
+            <li><b>Price:</b> [[${stock.closing}]]</li>
+            <li><b>Change:</b> [[${stock.changeAbs}]] [[${stock.changePC}]]</li>
+            <li><b>Open:</b> [[${stock.open}]]</li>
+            <li><b>Prev Close:</b> [[${stock.prevClose}]]</li>
+            <li><b>Volume:</b> [[${stock.volume}]]</li>
+            <li><b>Market Cap:</b> [[${stock.marketCap}]]</li>
+        </ul>
+    </div>
+</section>
+<section data-th-if="${transcript}" class="section">
+    <div class="container">
+        <h1 class="title">Last Earnings Call Transcript</h1>
+        <p class="subtitle"><a data-th-href="${transcript.url}" target="_blank">[[${transcript.headline}]]</a></p>
+    </div>
+</section>
+<section data-th-if="${news}" class="section">
+    <div class="container">
+        <h1 class="title">News</h1>
+        <ul>
+            <li data-th-each="newsArticle : ${news}">
+                <p class="subtitle"><a data-th-href="${newsArticle.url}" target="_blank">[[${newsArticle.headline}]]</a></p>
+                <p>[[${newsArticle.date}]]</p>
+                <br>
+            </li>
+        </ul>
+    </div>
+</section>
+
+</body>
+</html>

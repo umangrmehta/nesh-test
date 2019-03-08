@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nesh Dashboard</title>
+
+    <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
+    <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
+    <script data-th-src="@{/webjars/timeago.js/3.0.0/dist/timeago.js}"></script>
+</head>
+<body>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                NEWS - [[${headline}]]
+            </h1>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div data-th-each="paragraph : ${paragraphs}" class="container">
+        <p>[[${paragraph.text}]]</p>
+        <span data-th-if="${paragraph.sentiment.score} < 0" style="background-color: darkred; color: white; border: black 1px solid">[[${paragraph.sentiment.label}]]</span>
+        <span data-th-if="${paragraph.sentiment.score} > 0" style="background-color: darkgreen; color: white; border: black 1px solid">[[${paragraph.sentiment.label}]]</span>
+        <span data-th-if="${paragraph.sentiment.score} == 0" style="border: black 1px solid">[[${paragraph.sentiment.label}]]</span>
+        <br>
+        <br>
+    </div>
+</section>
+</body>
+</html>

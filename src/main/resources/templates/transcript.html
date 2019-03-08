@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nesh Dashboard</title>
+
+    <link data-th-href="@{/webjars/bulma/0.6.0/css/bulma.css}" rel="stylesheet">
+    <link rel="stylesheet" data-th-href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
+    <script data-th-src="@{/webjars/timeago.js/3.0.0/dist/timeago.js}"></script>
+</head>
+<body>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                [[${headline}]]
+            </h1>
+            <p>[[${description}]]</p>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div data-th-each="part : ${participants}" class="container">
+        <p><b>[[${part.title}]]</b></p>
+        <p data-th-each="person : ${part.people}">[[${person}]]</p>
+        <br>
+        <br>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <p><b>[[${longestSpeaker}]]</b> spoke the longest.</p>
+    </div>
+</section>
+<section class="section">
+    <div data-th-each="summary : ${summaries}" class="container">
+        <p>
+            <span data-th-if="${summary.sentiment.score} < 0" style="background-color: darkred; color: white; border: black 1px solid">[[${summary.sentiment.label}]]</span>
+            <span data-th-if="${summary.sentiment.score} > 0" style="background-color: darkgreen; color: white; border: black 1px solid">[[${summary.sentiment.label}]]</span>
+            <span data-th-if="${summary.sentiment.score} == 0" style="border: black 1px solid">[[${summary.sentiment.label}]]</span>
+            [[${summary.text}]]</p>
+        <br>
+        <br>
+    </div>
+</section>
+</body>
+</html>
